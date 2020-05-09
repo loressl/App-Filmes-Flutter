@@ -3,6 +3,13 @@ import 'package:app_filmes/widgets/bg_login.dart';
 import 'package:app_filmes/login/login_api.dart';
 import 'package:app_filmes/widgets/textfield.dart';
 import 'package:app_filmes/utils/validators.dart';
+import 'package:app_filmes/widgets/button.dart';
+import 'package:app_filmes/utils/nav.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:app_filmes/widgets/link.dart';
+import 'login_bloc.dart';
+import 'package:app_filmes/cadastro/cadastro_page.dart';
+import 'package:app_filmes/utils/alerts.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
   final _input = LoginInput();
-  //final _bloc =
+  final _bloc =  LoginBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -31,36 +38,111 @@ class _LoginPageState extends State<LoginPage> {
   _body(){
     return Form(
       key:_formKey,
-      child: Container(
-        alignment:Alignment.bottomLeft,
-        padding: EdgeInsets.fromLTRB(10, 230,70, 15),
-        child: ListView(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: AppText(
-                "Login",
-                "Digite o seu login",
-                validator: (text){
-                  return validateRequired(text, "Informe o login");
-                },
-                onSaved: (value)=>this._input.login=value,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.all(10.0),
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        child: Container(
+          padding: EdgeInsets.fromLTRB(5, 130, 50, 10),
+          child: Column(
+            mainAxisAlignment:MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text("Welcome", style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 28),),
+              SizedBox(height: 20.0,),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                child: AppText(
+                  "Login",
+                  "Digite o seu login",
+                  validator: (text){
+                    return validateRequired(text, "Informe o login");
+                  },
+                  onSaved: (value)=>this._input.login=value,
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 16),
-              child: AppText(
-                "Senha",
-                "Digite o seu Senha",
-                validator: (text){
-                  return validateRequired(text, "Informe a senha");
-                },
-                onSaved: (value)=>this._input.login=value,
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                child: AppText(
+                  "Senha",
+                  "Digite a sua senha",
+                  validator: (text){
+                    return validateRequired(text, "Informe a senha");
+                  },
+                  onSaved: (value)=>this._input.login=value,
+                ),
               ),
-            ),
-          ],
+              StreamBuilder<bool>(
+                stream: _bloc.progress.stream,
+                initialData: false,
+                builder:(context, snapshot) {
+                  return Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top:16),
+                    child: AppButton(
+                      "Login",
+                      _onClickLogin,
+                      showProgress: snapshot.data,
+                    ),
+                  );
+                },
+              ),
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 10),
+                child: GoogleSignInButton(
+                  onPressed: _onClickGoogle,
+                  borderRadius: 22,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                child: Center(
+                  child: AppLink(
+                    "Cadastra-se",
+                    _onClickCadastro,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  _onClickLogin() async{
+    if(!_formKey.currentState.validate())
+      return;
+
+    //salva o form
+    _formKey.currentState.save();
+
+    print("Login: ${_input.login}, senha: ${_input.senha}");
+
+    final response = await _bloc.login(_input);
+
+    if(response.isOk()){
+      //pushReplacement(context, null);
+    }else{
+      alert(context, "Filmes", response.msg);
+    }
+  }
+
+  _onClickGoogle(){
+    print("Google");
+  }
+
+  _onClickCadastro(){
+    print("Cadastro");
+    //push(context, null);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bloc.dispose();
   }
 }

@@ -14,30 +14,31 @@ class AppText extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: this.validator,
-      onSaved: this.onSaved,
-      obscureText: password,
-      keyboardType: TextInputType.text,
-      style: TextStyle(
-        color: Colors.lightBlue,
-        fontSize: 18,
-      ),
-      decoration: InputDecoration(
-        labelText: this.label,
-        labelStyle: TextStyle(
-          color: Colors.lightBlue, fontSize: 18, fontWeight: FontWeight.bold,
+        validator: this.validator,
+        onSaved: this.onSaved,
+        obscureText: password,
+        keyboardType: TextInputType.text,
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontSize: 16,
         ),
-        hintText: this.hint,
-        hintStyle: TextStyle(
-          color: Theme.of(context).hintColor,
-          fontSize: 18,
+        decoration: InputDecoration(
+          labelText:this.label ,
+          labelStyle: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 16,
+          ),
+          hintText: this.hint,
+          hintStyle: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 16,
+          ),
+          //border: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+          filled: true,
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+          errorStyle: TextStyle(fontSize: 13)
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        errorStyle: TextStyle(fontSize: 18)
-      ),
     );
   }
 }
