@@ -10,6 +10,7 @@ import 'package:app_filmes/widgets/link.dart';
 import 'login_bloc.dart';
 import 'package:app_filmes/cadastro/cadastro_page.dart';
 import 'package:app_filmes/utils/alerts.dart';
+import 'package:app_filmes/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -43,13 +44,13 @@ class _LoginPageState extends State<LoginPage> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
-          padding: EdgeInsets.fromLTRB(5, 130, 50, 10),
+          padding: EdgeInsets.fromLTRB(5, 140, 50, 10),
           child: Column(
             mainAxisAlignment:MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text("Welcome", style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 28),),
+              Text("Bem-Vindo", style: TextStyle(color: Color(0xFFCCE5FF),fontSize: 28),),
               SizedBox(height: 20.0,),
               Container(
                 margin: EdgeInsets.only(top: 5),
@@ -67,10 +68,11 @@ class _LoginPageState extends State<LoginPage> {
                 child: AppText(
                   "Senha",
                   "Digite a sua senha",
+                  password:true,
                   validator: (text){
                     return validateRequired(text, "Informe a senha");
                   },
-                  onSaved: (value)=>this._input.login=value,
+                  onSaved: (value)=>this._input.senha=value,
                 ),
               ),
               StreamBuilder<bool>(
@@ -100,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.only(top: 5),
                 child: Center(
                   child: AppLink(
-                    "Cadastra-se",
+                    "Cadastrar-se",
                     _onClickCadastro,
                     color: Colors.white,
                   ),
@@ -125,7 +127,8 @@ class _LoginPageState extends State<LoginPage> {
     final response = await _bloc.login(_input);
 
     if(response.isOk()){
-      //pushReplacement(context, null);
+      print("ok homepage");
+      pushReplacement(context, HomePage());
     }else{
       alert(context, "Filmes", response.msg);
     }
@@ -137,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _onClickCadastro(){
     print("Cadastro");
-    //push(context, null);
+    push(context, CadastroPage());
   }
 
   @override
