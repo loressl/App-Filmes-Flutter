@@ -12,6 +12,6 @@ Future pushReplacement(BuildContext context, Widget page){
   }));
 }
 
-// bool pop<T extends Object>(context,[T result]){
-//   return Navigator.pop(context, result);
-// }
+pop<T extends Object>(context,[T result]){
+  return Navigator.pop(context, result);
+}
