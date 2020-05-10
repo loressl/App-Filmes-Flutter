@@ -19,24 +19,24 @@ class AppText extends StatelessWidget{
         obscureText: password,
         keyboardType: TextInputType.text,
         style: TextStyle(
-          color: Theme.of(context).primaryColor,
+          color: Color(0xFFCCE5FF),
           fontSize: 16,
         ),
         decoration: InputDecoration(
           labelText:this.label ,
           labelStyle: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: Color(0xFFCCE5FF),
             fontSize: 16,
           ),
           hintText: this.hint,
           hintStyle: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: Color(0xFFCCE5FF),
             fontSize: 16,
           ),
           //border: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
           filled: true,
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).primaryColor)),
+            borderSide: BorderSide(color:Color(0xFFCCE5FF))),
           errorStyle: TextStyle(fontSize: 13)
         ),
     );

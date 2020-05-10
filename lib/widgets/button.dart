@@ -9,9 +9,9 @@ class AppButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor1 = Color(0xFF99CBFF);
-    final backgroundColor2 = Color(0xFFE8F8FF);
-    final textColor = Color(0xFF004D8F);
+    final backgroundColor1 = Color(0xFF84E4F2);
+    final backgroundColor2 = Color(0xFF2C8ACA);
+    final textColor = Color(0xFF001B50);
     return Container(
       width:200,
       decoration: BoxDecoration(
