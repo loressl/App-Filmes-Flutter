@@ -44,67 +44,81 @@ class _LoginPageState extends State<LoginPage> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
-          padding: EdgeInsets.fromLTRB(5, 140, 50, 10),
+          padding: EdgeInsets.fromLTRB(5, 60, 5, 10),
           child: Column(
             mainAxisAlignment:MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text("Bem-Vindo", style: TextStyle(color: Color(0xFFCCE5FF),fontSize: 28),),
+              Text("Bem-Vindo", style: TextStyle(color: Colors.black,fontSize: 35, fontWeight: FontWeight.bold),),
               SizedBox(height: 20.0,),
-              Container(
-                margin: EdgeInsets.only(top: 5),
-                child: AppText(
-                  "Login",
-                  "Digite o seu login",
-                  validator: (text){
-                    return validateRequired(text, "Informe o login");
-                  },
-                  onSaved: (value)=>this._input.login=value,
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 5),
-                child: AppText(
-                  "Senha",
-                  "Digite a sua senha",
-                  password:true,
-                  validator: (text){
-                    return validateRequired(text, "Informe a senha");
-                  },
-                  onSaved: (value)=>this._input.senha=value,
-                ),
-              ),
-              StreamBuilder<bool>(
-                stream: _bloc.progress.stream,
-                initialData: false,
-                builder:(context, snapshot) {
-                  return Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top:16),
-                    child: AppButton(
-                      "Login",
-                      _onClickLogin,
-                      showProgress: snapshot.data,
-                    ),
-                  );
-                },
-              ),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 10),
-                child: GoogleSignInButton(
-                  onPressed: _onClickGoogle,
-                  borderRadius: 22,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 5),
-                child: Center(
-                  child: AppLink(
-                    "Cadastrar-se",
-                    _onClickCadastro,
-                    color: Colors.white,
+                elevation: 8,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: AppText(
+                          "Login",
+                          "Digite o seu login",
+                          validator: (text){
+                            return validateRequired(text, "Informe o login");
+                          },
+                          onSaved: (value)=>this._input.login=value,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: AppText(
+                          "Senha",
+                          "Digite a sua senha",
+                          password:true,
+                          validator: (text){
+                            return validateRequired(text, "Informe a senha");
+                          },
+                          onSaved: (value)=>this._input.senha=value,
+                        ),
+                      ),
+                      StreamBuilder<bool>(
+                        stream: _bloc.progress.stream,
+                        initialData: false,
+                        builder:(context, snapshot) {
+                          return Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.only(top:16),
+                            child: AppButton(
+                              "Login",
+                              _onClickLogin,
+                              showProgress: snapshot.data,
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 10),
+                        child: GoogleSignInButton(
+                          onPressed: _onClickGoogle,
+                          borderRadius: 22,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: Center(
+                          child: AppLink(
+                            "Cadastrar-se",
+                            _onClickCadastro,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         title: "App Filmes",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor:Color(0xFF001B50),
+          primaryColor:Colors.black,
         ),
         home: LoginPage(),
       ),
