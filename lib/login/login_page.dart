@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text("Bem-Vindo", style: TextStyle(color: Colors.black,fontSize: 35, fontWeight: FontWeight.bold),),
+              Text("Bem-Vindo", style: TextStyle(color: Colors.white,fontSize: 35, fontWeight: FontWeight.bold),),
               SizedBox(height: 20.0,),
               Card(
                 shape: RoundedRectangleBorder(
