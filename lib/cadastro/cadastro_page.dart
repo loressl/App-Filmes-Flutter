@@ -6,6 +6,7 @@ import 'package:app_filmes/widgets/button.dart';
 import 'package:app_filmes/widgets/textfield.dart';
 import 'package:app_filmes/widgets/button_cancel.dart';
 
+
 import 'package:app_filmes/home/home_page.dart';
 
 import 'cadastro_api.dart';
@@ -25,10 +26,10 @@ class _CadastroPageState extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color(0xFF001B50),
+      backgroundColor: Color(0xFF9E0206),
       appBar: AppBar(
-        title: Text("Cadastrar"),
-        backgroundColor:Color(0xFF001B58),
+        elevation: 0.0,
+        backgroundColor:Color(0xFF9E0206).withOpacity(0.5),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -42,110 +43,109 @@ class _CadastroPageState extends State<CadastroPage> {
   _body(){
     return Form(
       key: _formKey,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(16, 5, 16, 0),
-        child: ListView(
-          children: <Widget>[
-            Container(
-              child: Image.asset("assets/images/deadpooloscar.jpg",
-                  width: 120, height: 120,),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              child: AppText(
-                "Nome",
-                "Digite o seu nome",
-                validator: (text){
-                  return validateRequired(text, "Informe o nome");
-                },
-                onSaved: (value) => this._input.nome = value,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              child: AppText(
-                "Email",
-                "Digite o seu email",
-                validator: (text){
-                  return validateRequired(text, "Informe o email");
-                },
-                onSaved: (value) => this._input.email = value,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top:5),
-              child: AppText(
-                "Login",
-                "Digite o seu login",
-                validator: (text){
-                  return validateRequired(text, "Informe o login");
-                },
-                onSaved: (value) => this._input.login = value,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              child: AppText(
-                "Senha",
-                "Digite a sua senha",
-                validator: (text){
-                  return validateRequired(text, "Informe a senha");
-                },
-                onSaved: (value) => this._input.senha = value,
-              ),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child:StreamBuilder<bool>(
-                    stream: _bloc.progress.stream,
-                    initialData: false,
-                    builder: (context, snapshot){
-                      return Container(
-                        margin:EdgeInsets.only(top: 10),
-                        child: AppButton(
-                          "Cadastrar",
-                          _onClickCadastrar,
-                          showProgress: snapshot.data,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.all(10.0),
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        child: Container(
+          padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 8,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Cadastro",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      );
-                    },
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: AppText(
+                          "Nome",
+                          "Digite o seu nome",
+                          validator: (text){
+                            return validateRequired(text, "Informe o nome");
+                          },
+                          onSaved: (value) => this._input.nome = value,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: AppText(
+                          "Email",
+                          "Digite o seu email",
+                          validator: (text){
+                            return validateRequired(text, "Informe o email");
+                          },
+                          onSaved: (value) => this._input.email = value,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top:5),
+                        child: AppText(
+                          "Login",
+                          "Digite o seu login",
+                          validator: (text){
+                            return validateRequired(text, "Informe o login");
+                          },
+                          onSaved: (value) => this._input.login = value,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: AppText(
+                          "Senha",
+                          "Digite a sua senha",
+                          validator: (text){
+                            return validateRequired(text, "Informe a senha");
+                          },
+                          onSaved: (value) => this._input.senha = value,
+                        ),
+                      ),
+                      StreamBuilder<bool>(
+                        stream: _bloc.progress.stream,
+                        initialData: false,
+                        builder: (context, snapshot){
+                          return Container(
+                            margin:EdgeInsets.only(top: 10),
+                            child: AppButton(
+                              "Cadastrar",
+                              _onClickCadastrar,
+                              showProgress: snapshot.data,
+                            ),
+                          );
+                        },
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: AppButtonCancel(
+                          "Cancelar",
+                          _onClickCancelar,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 10,),
-                Expanded(
-                  child:Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: AppButtonCancel(
-                      "Cancelar",
-                      _onClickCancelar,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            // StreamBuilder<bool>(
-            //   stream: _bloc.progress.stream,
-            //   initialData: false,
-            //   builder: (context, snapshot){
-            //     return Container(
-            //       margin:EdgeInsets.only(top: 10),
-            //       child: AppButton(
-            //         "Cadastrar",
-            //         _onClickCadastrar,
-            //         showProgress: snapshot.data,
-            //       ),
-            //     );
-            //   },
-            // ),
-            // Container(
-            //   margin: EdgeInsets.only(top: 8),
-            //   child: AppButtonCancel(
-            //     "Cancelar",
-            //     _onClickCancelar,
-            //   ),
-            // ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -161,7 +161,7 @@ class _CadastroPageState extends State<CadastroPage> {
     final response = await _bloc.cadastrar(_input);
     if(response.isOk()){
       print("ok");
-      pushReplacement(context, null);
+      pushReplacement(context, HomePage());
     }else{
       alert(context, "Filmes", response.msg);
     }
