@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:app_filmes/utils/nav.dart';
 import 'package:app_filmes/login/login_page.dart';
 import 'drawer.dart';
+import 'package:app_filmes/favoritos/favoritos_bloc.dart';
+import 'package:app_filmes/favoritos/tab_favoritos.dart';
+import 'package:app_filmes/movies/movies_bloc.dart';
+import 'package:app_filmes/movies/tab_movies.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +27,10 @@ class _HomePageState extends State<HomePage>with SingleTickerProviderStateMixin<
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs:[],
+      blocs:[
+        Bloc((i)=>MoviesBloc()),
+        Bloc((i)=>FavoritosBloc()),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text("Filmes"),
@@ -49,7 +56,10 @@ class _HomePageState extends State<HomePage>with SingleTickerProviderStateMixin<
         ),
         body: TabBarView(
           controller: tabController,
-          children: <Widget>[],
+          children: <Widget>[
+            TabMovies(),
+            TabFavoritos(),
+          ],
         ),
         drawer: DrawerMenu(),
       ),

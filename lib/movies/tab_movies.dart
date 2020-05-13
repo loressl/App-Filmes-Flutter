@@ -1,29 +1,27 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'favoritos_bloc.dart';
-import 'package:app_filmes/movies/movie.dart';
+import 'movie.dart';
+import 'movie_page.dart';
+import 'movies_bloc.dart';
 import 'package:app_filmes/utils/nav.dart';
 import 'package:app_filmes/widgets/text_empty.dart';
 import 'package:app_filmes/widgets/text_error.dart';
-import 'package:app_filmes/movies/movie_page.dart';
 
-
-class TabFavoritos extends StatefulWidget {
+class TabMovies extends StatefulWidget {
   @override
-  _TabFavoritosState createState() => _TabFavoritosState();
+  _TabMoviesState createState() => _TabMoviesState();
 }
 
-class _TabFavoritosState extends State<TabFavoritos>with AutomaticKeepAliveClientMixin<TabFavoritos> {
+class _TabMoviesState extends State<TabMovies> with AutomaticKeepAliveClientMixin<TabMovies> {
 
   @override
   bool get wantKeepAlive => true;
 
-  FavoritosBloc get bloc => BlocProvider.getBloc<FavoritosBloc>();
+  final bloc = BlocProvider.getBloc<MoviesBloc>();
 
   @override
   void initState() {
     super.initState();
-
     bloc.fetch();
   }
 
@@ -33,6 +31,7 @@ class _TabFavoritosState extends State<TabFavoritos>with AutomaticKeepAliveClien
       stream: bloc.stream,
       builder: (context, snapshot){
         if(snapshot.hasError){
+          //erro
           return Center(
             child: TextError(
               snapshot.error,
@@ -48,32 +47,29 @@ class _TabFavoritosState extends State<TabFavoritos>with AutomaticKeepAliveClien
         }
 
         List<Movie> movies = snapshot.data;
-        print("Movies $movies");
-
-        return movies.isEmpty? TextEmpty("Nenhum filme nos favoritos."):
-                              _griView(movies, context);
+        return movies.isEmpty ? TextEmpty("Nenhum filme."):_griView(movies, context);
       },
     );
   }
 
-  _griView(List<Movie> movies,context){
+  _griView(List<Movie> movies, context){
     return RefreshIndicator(
       onRefresh: _onRefresh,
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: movies.length,
-        itemBuilder: (context, index){
-          return _item(movies, index,context);
-        },
+        gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemCount: movies.length,
+          itemBuilder: (context, index){
+            return _item(movies, index, context);
+          },
       ),
     );
   }
 
   _item(List<Movie> movies, index, context){
-    Movie m= movies[index];
-
+    Movie m = movies[index];
     //tag para a animação do hero
-    m.tag=m.title + "-fav";
+    m.tag = m.title;
 
     return Material(
       child: InkWell(
@@ -95,12 +91,11 @@ class _TabFavoritosState extends State<TabFavoritos>with AutomaticKeepAliveClien
     push(context, MoviePage(m));
   }
 
-  Future<void> _onRefresh() {
+  Future<void> _onRefresh(){
     return bloc.fetch();
   }
 
   Future<void> _onRefreshError(){
     return bloc.fetch(isRefresh: true);
   }
-
 }
