@@ -12,6 +12,8 @@ import 'package:app_filmes/cadastro/cadastro_page.dart';
 import 'package:app_filmes/utils/alerts.dart';
 import 'package:app_filmes/home/home_page.dart';
 
+import 'package:app_filmes/widgets/button_cancel.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,8 +25,11 @@ class _LoginPageState extends State<LoginPage> {
   final _input = LoginInput();
   final _bloc =  LoginBloc();
 
+  double screenHeight;
+
   @override
   Widget build(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body:Stack(
         fit: StackFit.expand,
@@ -44,19 +49,19 @@ class _LoginPageState extends State<LoginPage> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
-          padding: EdgeInsets.fromLTRB(5, 60, 5, 10),
+          padding: EdgeInsets.fromLTRB(5, screenHeight/8, 5, 10),
           child: Column(
             mainAxisAlignment:MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text("Bem-Vindo", style: TextStyle(color: Colors.white,fontSize: 35, fontWeight: FontWeight.bold),),
-              SizedBox(height: 20.0,),
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 elevation: 8,
+                margin:EdgeInsets.only(top: 45.0),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Column(

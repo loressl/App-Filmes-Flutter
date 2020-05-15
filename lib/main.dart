@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+  //SharedPreferences.setMockInitialValues({});
   runApp(MyApp());
 }
 
@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
         title: "App Filmes",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor:Colors.black,
+          //primaryColor:Colors.black,
+          primaryColor: Color(0xFF9E0206),
         ),
         home: LoginPage(),
       ),

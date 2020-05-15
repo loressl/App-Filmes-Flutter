@@ -9,40 +9,35 @@ class AppButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    //final backgroundColor1 = Color(0xFF84E4F2);
-    //final backgroundColor2 = Color(0xFF2C8ACA);
-    //final textColor = Color(0xFF001B50);
-    //final textColor= Color(0xFFCCE5FF);
+    final backgroundColor1 = Color(0xFF9E0206);
+    final backgroundColor2 = Color(0xFFDD381E);
+    final textColor= Colors.white;
 
-    final color= Colors.black;
     return Container(
       width:200,
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(22),
-      //     color: Color(0xFF2C8ACA),
-      //   // gradient: LinearGradient(
-      //   //   colors: [backgroundColor1, backgroundColor2],
-      //   //   begin: FractionalOffset.topCenter,
-      //   //   end: FractionalOffset.bottomCenter,
-      //   // ),
-      // ),
-      child: OutlineButton(
-        borderSide: BorderSide(color: color),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22), ),
-        child: showProgress?
-          Center(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+          color: backgroundColor1,
+        gradient: LinearGradient(
+          colors: [backgroundColor1, backgroundColor2],
+          begin: FractionalOffset.topCenter,
+          end: FractionalOffset.bottomCenter,
+        ),
+      ),
+      child: FlatButton(
+        child: showProgress
+          ?Center(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(color),
+              valueColor: AlwaysStoppedAnimation<Color>(textColor),
             ),
           ):Text(
             text,
-            style: TextStyle(
+            style:TextStyle(
               fontSize: 18,
-              color: color,
-              fontWeight: FontWeight.bold,
+              color: textColor,
             ),
           ),
-          onPressed: callback,
+        onPressed: callback,
       ),
     );
   }
