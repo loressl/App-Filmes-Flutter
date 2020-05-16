@@ -12,8 +12,6 @@ import 'package:app_filmes/cadastro/cadastro_page.dart';
 import 'package:app_filmes/utils/alerts.dart';
 import 'package:app_filmes/home/home_page.dart';
 
-import 'package:app_filmes/widgets/button_cancel.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();

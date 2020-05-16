@@ -18,24 +18,10 @@ class DrawerMenu extends StatelessWidget{
             ),
             ListTile(
               onTap: (){
-                print("item 1");
+                print("Perfil");
               },
-              title: Text("Item 1"),
-              leading: Icon(Icons.star),
-            ),
-            ListTile(
-              onTap: (){
-                print("item 2");
-              },
-              title: Text("Item 2"),
-              leading: Icon(Icons.star),
-            ),
-            ListTile(
-              onTap: (){
-                print("item 3");
-              },
-              title: Text("Item 3"),
-              leading: Icon(Icons.star),
+              title: Text("Perfil"),
+              leading: Icon(Icons.person),
             ),
             ListTile(
               onTap: (){

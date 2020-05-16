@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:app_filmes/login/login_page.dart';
-import 'package:flutter/foundation.dart'
-    show debugDefaultTargetPlatformOverride;
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
-  WidgetsFlutterBinding.ensureInitialized();
-  //SharedPreferences.setMockInitialValues({});
   runApp(MyApp());
 }
 
@@ -17,14 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      blocs:[
-
-      ],
       child: MaterialApp(
         title: "App Filmes",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          //primaryColor:Colors.black,
           primaryColor: Color(0xFF9E0206),
         ),
         home: LoginPage(),

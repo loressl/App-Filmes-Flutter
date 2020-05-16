@@ -34,7 +34,6 @@ class _MoviePageState extends State<MoviePage> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          backgroundColor: Colors.black,
           expandedHeight: 350,
           pinned: false,
           actions: <Widget>[

@@ -30,8 +30,6 @@ class AppText extends StatelessWidget{
           hintStyle: TextStyle(
             fontSize: 16,
           ),
-          //border: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).primaryColor)),
-          //filled: true,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color:Colors.black)),
           errorStyle: TextStyle(fontSize: 13)
